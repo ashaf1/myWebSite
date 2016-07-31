@@ -35,7 +35,8 @@
 	fundamental as well as quantitative methods.   
 	</p>
 	<p>
-	- Sophomore year, I founded the Shaker Heights High School Investment Club.             
+	- Sophomore year, I founded the Shaker Heights High School Investment Club. Our motto, "Food, Friends, Finance, and Fun" encompasses 
+	the              
 	</p>
 	<p>
 	
