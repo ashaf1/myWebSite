@@ -1,9 +1,9 @@
 package com.aaronshafron.mysite.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public interface DataDAO {
 
-	public MarketData getDataByDateRangeAndDB(LocalDate begin, LocalDate end, String databaseName);
+	public MarketData getDataByDateRangeAndDB(Date begin, Date end, String stockName);
 	
 }

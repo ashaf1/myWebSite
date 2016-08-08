@@ -6,6 +6,8 @@ public class MarketData {
 	
 	private LocalDate startDate;
 	private LocalDate endDate;
+	private double beginClose;
+	private double endClose;
 	private double open;
 	private double high;
 	private double low;
@@ -14,7 +16,6 @@ public class MarketData {
 	private long avgVolume;
 	private long maxVolume;
 	private long minVolume;
-	private int id;
 	private double correlation;
 	private double regCoef;
 	private double yIntercept;
@@ -66,12 +67,7 @@ public class MarketData {
 	public void setVolume(long volume) {
 		this.volume = volume;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public double getCorrelation() {
 		return correlation;
 	}
@@ -138,6 +134,18 @@ public class MarketData {
 	}
 	public void setyIntercept(double yIntercept) {
 		this.yIntercept = yIntercept;
+	}
+	public double getBeginClose() {
+		return beginClose;
+	}
+	public void setBeginClose(double beginClose) {
+		this.beginClose = beginClose;
+	}
+	public double getEndClose() {
+		return endClose;
+	}
+	public void setEndClose(double endClose) {
+		this.endClose = endClose;
 	}
 	
 }

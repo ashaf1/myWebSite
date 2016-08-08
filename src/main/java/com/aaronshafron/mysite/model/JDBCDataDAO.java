@@ -1,6 +1,7 @@
 package com.aaronshafron.mysite.model;
 
-import java.time.LocalDate;
+
+import java.sql.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -21,46 +22,52 @@ public class JDBCDataDAO implements DataDAO {
 	}
 
 	@Override
-	public MarketData getDataByDateRangeAndDB(LocalDate begin, LocalDate end, String databaseName) {
-		String sqlGetAllData = "Select max(close) AS maxPrice, "
-				+ "min(close) AS minPrice, cast(avg(volume) as numeric(20,0)) AS avgVolume, "
-				+ "max(volume) AS maxVolume, min(volume) AS minVolume,"
-				+ "(Select (Select close from ? where date = ?) - (Select close from ? where date = ?) from ? limit 1) AS dollarChange,"
-				+ "(Select cast((((Select close from ? where date = ?) - (Select close from ? where date = ?))*100/(Select close from ? where date = ?))as numeric(10,2)) from ? limit 1) AS percChange, "
-				+ "(select cast(stddev(close) as numeric(10,2)) from ? where date >= ? AND date <= ?) AS stdDev "
-				+ "from ? "
-				+ "where date >= ? AND date <= ?";
-		SqlRowSet resultSet = jdbcTemplate.queryForRowSet(sqlGetAllData, databaseName, begin, databaseName, end, databaseName,
-												          databaseName, begin, databaseName, end, databaseName, end, databaseName,
-												          databaseName, begin, end,
-												          databaseName,
-												          begin, end);
+	public MarketData getDataByDateRangeAndDB(Date begin, Date end, String stockName) {
+		String sqlGetAllData = "Select (select close from market_data where name = ? AND date = ?) as begin_close, "
+                + "(select close from market_data where name = ? AND date = ?) as end_close, "
+				+ "max(close) AS max_close, "
+				+ "min(close) AS min_close, cast(avg(volume) as numeric(20,0)) AS avg_volume, "
+				+ "max(volume) AS max_volume, min(volume) AS min_volume, "
+				+ "((Select close from market_data where name = ? AND date = ?) - (Select close from market_data where name = ? AND date = ?)) AS dollar_change, "
+				+ "cast((((Select close from market_data where name = ? AND date = ?) - (Select close from market_data where name = ? AND date = ?))*100/(Select close from market_data where name = ? AND date = ?))as numeric(10,2)) AS perc_change, "
+				+ "cast(stddev(close) as numeric(10,2)) AS std_dev "
+				+ "from market_data "
+				+ "where name = ? AND date >= ? AND date <= ?";
+		SqlRowSet resultSet = jdbcTemplate.queryForRowSet(sqlGetAllData, stockName, begin, 
+														  stockName, end, 
+														  stockName, end, stockName, begin,
+												          stockName, end, stockName, begin, stockName, begin,
+												          stockName, begin, end
+												      	  );
 		MarketData data = new MarketData();
 		while(resultSet.next()){
-			data.setMaxPrice(resultSet.getDouble("maxPrice"));
-			data.setMinPrice(resultSet.getDouble("minPrice"));
-			data.setAvgVolume(resultSet.getLong("avgVolume"));
-			data.setMaxVolume(resultSet.getLong("maxVolume"));
-			data.setMinVolume(resultSet.getLong("minVolume"));
-			data.setDollarChange(resultSet.getDouble("dollarChange"));
-			data.setPercChange(resultSet.getDouble("percChange"));
-			data.setStdDeviation(resultSet.getDouble("stdDev"));
+			data.setBeginClose(resultSet.getDouble("begin_close"));
+			data.setEndClose(resultSet.getDouble("end_close"));
+			data.setMaxPrice(resultSet.getDouble("max_close"));
+			data.setMinPrice(resultSet.getDouble("min_close"));
+			data.setAvgVolume(resultSet.getLong("avg_volume"));
+			data.setMaxVolume(resultSet.getLong("max_volume"));
+			data.setMinVolume(resultSet.getLong("min_volume"));
+			data.setDollarChange(resultSet.getDouble("dollar_change"));
+			data.setPercChange(resultSet.getDouble("perc_change"));
+			data.setStdDeviation(resultSet.getDouble("std_dev"));
 		}
 		return data;
 	}
-	public MarketData getDataByDateRangeAndTwoDBNames(LocalDate begin, LocalDate end, String databaseName1, String databaseName2){
-		String sqlGetAllData = "Select cast(regr_slope(?.close, ?.close) as numeric(10,2)) as regSlope, "
-				+ "cast(corr(?.close, ?.close) as numeric(10,2)) as correlation, "
-				+ "cast(regr_intercept(?.close, ?.close) as numeric(10,2)) as y_intercept "
-				+ "from ? join ? ON ?_day_id = ?_day_id "
-				+ "where ?.date >= ? AND ?.date <= ?";
-		SqlRowSet resultSet= jdbcTemplate.queryForRowSet(sqlGetAllData, databaseName2, databaseName1,
-														 databaseName2, databaseName1,
-														 databaseName2, databaseName1,
-														 databaseName1, databaseName2, databaseName1, databaseName2,
-														 databaseName1, begin, databaseName1, end);
+	public MarketData getDataByDateRangeAndTwoDBNames(Date begin, Date end, String stockName1, String stockName2){
+		String sqlGetAllData = "Select cast(regr_slope(query2.close, query1.close) as numeric(10,2)) as regSlope, "
+				+ "cast(corr(query2.close, query1.close) as numeric(10,2)) as correlation, "
+				+ "cast(regr_intercept(query2.close, query1.close) as numeric(10,2)) as y_intercept "
+				+ "from (select close, date, name from market_data where name = ? AND date >= ? AND date <= ?) as query1 "
+				+ "inner join "
+				+ "(select close, date, name from market_data where name = ? AND date >= ? AND date <= ?) as query2 " 
+				+ "ON query1.date = query2.date";
+		SqlRowSet resultSet= jdbcTemplate.queryForRowSet(sqlGetAllData, stockName1, begin, end,
+														 stockName2, begin, end
+														);
 		MarketData data = new MarketData();
 		while(resultSet.next()){
+			
 			data.setCorrelation(resultSet.getDouble("correlation"));
 			data.setyIntercept(resultSet.getDouble("y_intercept"));
 			data.setRegCoef(resultSet.getDouble("regSlope"));

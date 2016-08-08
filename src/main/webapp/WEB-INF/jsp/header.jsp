@@ -4,22 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:url value="/css/site.css" var="cssURL" />
-<link rel="stylesheet" type="text/css" href="${cssURL}">
+
+	<c:url value="/css/site.css" var="cssURL" />
+	<link rel="stylesheet" type="text/css" href="${cssURL}">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
 <title>aaronshafron.com</title>
 </head>
 
 <body>
 
 <div id="content">
-    
-    <nav>
-    		<ul>
+    <div class="container-fluid">
+    <nav class="nav navbar-default col-sm-12">
+    		<ul class="nav navbar-nav">
     			<li><a href="home">Home</a></li>
     			<li><a href="favoriteThings">My Favorite Things</a></li>
     			<li><a href="funWithStocks">Fun With Stocks!</a></li>
     			<li><a href="contact">Contact Me</a></li>
     		</ul>
     </nav>
-    
-    <h1><c:out value="${param.pageTitle}" /></h1>
+    </div>
+    <h1 id="pageTitle"><c:out value="${param.pageTitle}" /></h1>

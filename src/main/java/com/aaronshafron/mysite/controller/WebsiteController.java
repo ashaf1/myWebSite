@@ -1,6 +1,7 @@
 package com.aaronshafron.mysite.controller;
 
 import java.time.LocalDate;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,37 +32,38 @@ public class WebsiteController {
 	public String showHomePage(){
 		return "home";
 	}
-	@RequestMapping("/aboutMe")
-	public String showAboutMePage(){
-		return "aboutMe";
-	}
+
 	@RequestMapping("/favoriteThings")
 	public String showFavoriteThingsPage(){
 		return "favoriteThings";
 	}
 	
 	@RequestMapping(path="/funWithStocks", method= RequestMethod.GET)
-	public String showFunWithStocksPage(ModelMap model, @RequestParam (required=false) String databaseName1, @RequestParam (required= false) String databaseName2, 
-										@RequestParam (required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate begin,
-										@RequestParam (required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end){
+	public String showFunWithStocksPage(ModelMap model, @RequestParam (value ="stockName1",required=false) String stockName1, 
+										@RequestParam (value="stockName2",required= false) String stockName2, 
+										@RequestParam (value="begin",required=false) Date begin,
+										@RequestParam (value="end",required=false) Date end){
 		MarketData data = null;
-		if(databaseName1 != null && databaseName2 == null){
-		data = jdbcDataDAO.getDataByDateRangeAndDB(begin, end, databaseName1);
-		} else if(databaseName1 !=null && databaseName2 != null) {
-		data = jdbcDataDAO.getDataByDateRangeAndTwoDBNames(begin, end, databaseName1, databaseName2);
+		if(stockName1 != null && stockName2 == null){
+		data = jdbcDataDAO.getDataByDateRangeAndDB(begin, end, stockName1);
+		} else if(stockName1 == null && stockName2 != null){
+			data = jdbcDataDAO.getDataByDateRangeAndDB(begin, end, stockName2);
 		}
+		else if(stockName1 !=null && stockName2 != null) {
+		data = jdbcDataDAO.getDataByDateRangeAndTwoDBNames(begin, end, stockName1, stockName2);
+		} 
 		model.addAttribute("data", data);
 		return "funWithStocks";
 	}
 	@RequestMapping(path="/funWithStocks", method= RequestMethod.POST)
-	public String redirectFunWithStocksPage(@RequestParam ("databaseName1") String databaseName1, @RequestParam ("databaseName2") String databaseName2, 
-											@RequestParam ("begin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate begin, 
-											@RequestParam ("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end, 
+	public String redirectFunWithStocksPage(@RequestParam (value = "stockName1", required = false) String stockName1, @RequestParam (value = "stockName2", required = false) String stockName2, 
+											@RequestParam ("begin") Date begin, 
+											@RequestParam ("end") Date end, 
 											RedirectAttributes redirectAttributes){
 		redirectAttributes.addAttribute("begin", begin);
 		redirectAttributes.addAttribute("end", end);
-		redirectAttributes.addAttribute("databaseName1", databaseName1);
-		redirectAttributes.addAttribute("databaseName2", databaseName2);
+		redirectAttributes.addAttribute("stockName1", stockName1);
+		redirectAttributes.addAttribute("stockName2", stockName2);
 		return "redirect:/funWithStocks";
 	}
 	@RequestMapping("contact")
