@@ -39,6 +39,9 @@
     
     <!-- Uncomment the following datasource definition and provide the correct database name, username, and password
     	 to connect to a database -->
+   <!--  <bean class="java.net.URI" id="dbUrl">
+    	<constructor-arg value="#{systemEnvironment"
+    </bean>	  -->
 	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/StockData" />
