@@ -10,16 +10,30 @@
   	<script src="javascript/validation.js"></script> 
 	</head>
 	<c:import url="/WEB-INF/jsp/header.jsp">
-	    <c:param name="pageTitle" value="Fun With Stocks!" />
+	    <%-- <c:param name="pageTitle" value="Fun With Stocks!" /> --%>
 	</c:import>
+	<body>
+
+<div id="content">
+    <div class="container-fluid">
+    <nav class="nav navbar-default col-sm-12">
+    		<ul class="nav navbar-nav">
+    			<li><a href="home">Home</a></li>
+    			<li><a href="favoriteThings">My Favorite Things</a></li>
+    			<li><a href="funWithStocks">Fun With Stocks!</a></li>
+    			<li><a href="contact">Contact Me</a></li>
+    		</ul>
+    </nav>
+    </div>
+    <%-- <c:param name="pageTitle" value="Fun With Stocks!"/> --%>
+    <h1 id="pageTitle">Fun With Stocks!</h1>
 	<h4>Notes of caution:</h4>
 	<p>
-	- Data is quite limited as having more than 10,000 rows in a database can be quite expensive. Play around with it to 
-	see when those dates are!</br>
+	- Data is limited to prices between August 14, 2006 and July 15, 2016 because having more than 10,000 rows in a database can be quite expensive.</br></br>
 	- If the results in the table contain zeroes, you most likely selected a weekend or a non-trading weekday. I'm currently
 	trying to build functionality to handle this issue. So if a weekend or non-trading day is selected, it will automatically 
 	grab the most recent trading day's data. Again, this will be added to Fun With Stocks! version 1.1.
-    </p>
+    </p></br>
    
 	<form id ="form" action="funWithStocks" method="POST">
 		<div id="dateInput">
@@ -116,6 +130,15 @@
 		</c:otherwise>
 	</c:choose>	
 	</table>
+
+</div> 
+
+<p class="footer"> Aaron Shafron 2016</br>
+Hosted by Heroku, Domain through NameCheap
+</p>
+
+</body>
+
+</html>
 	
-	
-<c:import url="/WEB-INF/jsp/footer.jsp" />
+<%-- <c:import url="/WEB-INF/jsp/footer.jsp" /> --%>

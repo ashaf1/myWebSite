@@ -8,8 +8,21 @@
 		<script src="javascript/jquery.validate.js"></script>
 	</head>
 	<c:import url="/WEB-INF/jsp/header.jsp">
-	    <c:param name="pageTitle" value="Welcome!" />
+	    <%-- <c:param name="pageTitle" value="Welcome!" /> --%>
 	</c:import>
+	<div id="content">
+    <div class="container-fluid">
+    <nav class="nav navbar-default col-sm-12">
+    		<ul class="nav navbar-nav">
+    			<li><a href="home">Home</a></li>
+    			<li><a href="favoriteThings">My Favorite Things</a></li>
+    			<li><a href="funWithStocks">Fun With Stocks!</a></li>
+    			<li><a href="contact">Contact Me</a></li>
+    		</ul>
+    </nav>
+    </div>
+    <%-- <c:param name="pageTitle" value="Home"/> --%>
+    <h1 id="pageTitle">Home</h1>
 <div id="welcome">
 	<h2 class="headerText">Here's a bit about me:</h2>
 </div>
@@ -63,5 +76,12 @@
 	degree(s) at some point in the future.
 	</p>
 </div>	
-	
-<c:import url="/WEB-INF/jsp/footer.jsp" />
+</div> 
+
+<p class="footer"> Aaron Shafron 2016</br>
+Hosted by Heroku, Domain through NameCheap
+</p>
+
+</body>
+
+<%-- <c:import url="/WEB-INF/jsp/footer.jsp" /> --%>

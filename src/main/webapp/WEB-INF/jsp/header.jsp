@@ -13,7 +13,7 @@
 <title>aaronshafron.com</title>
 </head>
 
-<body>
+<%-- <body>
 
 <div id="content">
     <div class="container-fluid">
@@ -26,4 +26,4 @@
     		</ul>
     </nav>
     </div>
-    <h1 id="pageTitle"><c:out value="${param.pageTitle}" /></h1>
+    <h1 id="pageTitle"><c:out value="${param.pageTitle}" /></h1> --%>

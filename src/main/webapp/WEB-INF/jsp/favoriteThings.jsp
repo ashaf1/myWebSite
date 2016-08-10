@@ -8,9 +8,23 @@
 		<script src="javascript/jquery.validate.js"></script>
 	</head>
 	<c:import url="/WEB-INF/jsp/header.jsp">
-	    <c:param name="pageTitle" value="My Favorite Things" />
+	   <%--  <c:param name="pageTitle" value="My Favorite Things" /> --%>
 	</c:import>
-	
+	<body>
+
+<div id="content">
+    <div class="container-fluid">
+    <nav class="nav navbar-default col-sm-12">
+    		<ul class="nav navbar-nav">
+    			<li><a href="home">Home</a></li>
+    			<li><a href="favoriteThings">My Favorite Things</a></li>
+    			<li><a href="funWithStocks">Fun With Stocks!</a></li>
+    			<li><a href="contact">Contact Me</a></li>
+    		</ul>
+    </nav>
+    </div>
+	<%-- <c:param name="pageTitle" value="My Favorite Things"/> --%>
+    <h1 id="pageTitle">Fun With Stocks </h1>
 	<div id="favoriteActivities">
 	<h2>Other than programming and trading, I...</h2>
 		<ul>
@@ -109,5 +123,14 @@
 		<h2>Movie watched within the past year: <i>The Barkley Marathons</i> </h2>
 		<iframe width="80%" height="330" src="https://www.youtube.com/embed/28UzhF3uvME" frameborder="0" allowfullscreen></iframe>
 	</div>
+	</div> 
+
+<p class="footer"> Aaron Shafron 2016</br>
+Hosted by Heroku, Domain through NameCheap
+</p>
+
+</body>
+
+</html>
 	
-<c:import url="/WEB-INF/jsp/footer.jsp" />
+<%-- <c:import url="/WEB-INF/jsp/footer.jsp" /> --%>
