@@ -32,8 +32,10 @@
 	- Data is limited to prices between August 14, 2006 and July 15, 2016 because having more than 10,000 rows in a database can be quite expensive.</br></br>
 	- If the results in the table contain zeroes, you most likely selected a weekend or a non-trading weekday. I'm currently
 	trying to build functionality to handle this issue. So if a weekend or non-trading day is selected, it will automatically 
-	grab the most recent trading day's data. Again, this will be added to Fun With Stocks! version 1.1.
-    </p></br>
+	grab the most recent trading day's data. Again, this will be added to Fun With Stocks! version 1.1.</br></br>
+	- Data for Apple is adjusted based on the 7-1 stock split that occurred in June 2014</br></br>
+	-You can select one security from either category or one from both.
+    </p>
    
 	<form id ="form" action="funWithStocks" method="POST">
 		<div id="dateInput">
@@ -43,7 +45,8 @@
 			<input type="date" name="end" id="end" min="2006-08-14" max="2016-07-15" required/>
 		</div>
 		<div id="selection1">	
-			<div id="sel1Input">
+			<div id="sel1Input"> 
+			<label for ="stockName1">Security X:</label>&nbsp;&nbsp;
 				<input type="radio" name="stockName1" value="SnP_500"/><label>S&P 500</label>
 				<input type="radio"	 name="stockName1" value="Apple"/><label>Apple</label>
 				<input type="radio" name="stockName1" value="Microsoft"/><label>Microsoft</label>
@@ -52,6 +55,7 @@
 		</div>
 		<div id="selection2">
 			<div id="sel2Input">
+			<label for="stockName2">Security Y:</label>&nbsp;&nbsp;
 				<input type="radio" name="stockName2" value="SnP_500"/><label>S&P 500</label>
 				<input type="radio"	 name="stockName2" value="Apple"/><label>Apple</label>
 				<input type="radio" name="stockName2" value="Microsoft"/><label>Microsoft</label>
@@ -73,8 +77,8 @@
 					<th>End Date</th>
 					<th>Begin Close</th>
 					<th>End Close</th>
-					<th>Max Price</th>
-					<th>Min Price</th>
+					<th>Max Close</th>
+					<th>Min Close</th>
 					<th>Avg Volume</th> 
 					<th>Max Volume</th>
 					<th>Min Volume</th>
