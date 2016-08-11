@@ -24,7 +24,7 @@
     </nav>
     </div>
 	<%-- <c:param name="pageTitle" value="My Favorite Things"/> --%>
-    <h1 id="pageTitle">Fun With Stocks </h1>
+    <h1 id="pageTitle">Favorite Things </h1>
 	<div id="favoriteActivities">
 	<h2>Other than programming and trading, I...</h2>
 		<ul>
