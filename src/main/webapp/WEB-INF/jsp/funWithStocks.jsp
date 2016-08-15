@@ -15,28 +15,43 @@
 	<body>
 
 <div id="content">
-    <div class="container-fluid">
-    <nav class="nav navbar-default col-sm-12">
-    		<ul class="nav navbar-nav">
+	<nav class="navbar navbar-default">
+    	<div class="container-fluid">
+    		<button class = "navbar-toggle nav-justified" data-toggle="collapse" data-target=".navHeaderCollapse">
+    			Menu
+   		 	</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+    		<ul class="nav nav-justified">
     			<li><a href="home">Home</a></li>
     			<li><a href="favoriteThings">My Favorite Things</a></li>
     			<li><a href="funWithStocks">Fun With Stocks!</a></li>
     			<li><a href="contact">Contact Me</a></li>
     		</ul>
+    		</div>	
+    	    	
+    	</div>
     </nav>
-    </div>
     <%-- <c:param name="pageTitle" value="Fun With Stocks!"/> --%>
     <h1 id="pageTitle">Fun With Stocks!</h1>
+    <div class="container-fluid row col-sm-12">
 	<h4>Notes of caution:</h4>
-	<p>
-	- Data is limited to prices between August 14, 2006 and July 15, 2016 because having more than 10,000 rows in a database can be quite expensive.</br></br>
+	
+	<p class ="col-sm-3">
+	- Data is limited to prices between August 14, 2006 and July 15, 2016 because having more than 10,000 rows in a database can be quite expensive.
+	</p>
+	<p class ="col-sm-5">
 	- If the results in the table contain zeroes, you most likely selected a weekend or a non-trading weekday. I'm currently
 	trying to build functionality to handle this issue. So if a weekend or non-trading day is selected, it will automatically 
-	grab the most recent trading day's data. Again, this will be added to Fun With Stocks! version 1.1.</br></br>
-	- Data for Apple is adjusted based on the 7-1 stock split that occurred in June 2014</br></br>
+	grab the most recent trading day's data. Again, this will be added to Fun With Stocks! version 1.1.
+	</p>
+	<p class ="col-sm-2">
+	- Data for Apple is adjusted based on the 7-1 stock split that occurred in June 2014
+	</p>
+	<p class ="col-sm-2">
 	-You can select one security from either category or one from both.
     </p>
    
+   	</div>
 	<form id ="form" action="funWithStocks" method="POST">
 		<div id="dateInput">
 			<label>Start Date (yyyy-mm-dd, yyyy/mm/dd... use date selector in Chrome)</label></br>
@@ -67,7 +82,7 @@
 		</div>
 	</form>
 	<h3>Results</h3>
-	<table id="results">
+	<table id="results" class ="table-inverse table-responsive col-xs-12">
 	<c:choose>
 		<c:when test="${(param.stockName1 != null && param.stockName2 == null) || (param.stockName1 == null && param.stockName2 != null)}">
 			
@@ -86,6 +101,7 @@
 					<th>Percentage Change</th>
 					<th>Standard Deviation</th>
 				</tr>
+				
 				<tr>
 					<c:choose>
 						<c:when test="${param.stockName1 == null}">
@@ -97,36 +113,36 @@
 					</c:choose>
 					<td>${param.begin}</td>
 					<td>${param.end}</td>
-					<td>${data.beginClose}</td>
-					<td>${data.endClose}</td>
-					<td>${data.maxPrice}</td>
-					<td>${data.minPrice}</td>
+					<td>$${data.beginClose}</td>
+					<td>$${data.endClose}</td>
+					<td>$${data.maxPrice}</td>
+					<td>$${data.minPrice}</td>
 					<td>${data.avgVolume}</td>
 					<td>${data.maxVolume}</td>
 					<td>${data.minVolume}</td>
-					<td>${data.dollarChange}</td>
-					<td>${data.percChange}</td>
-					<td>${data.stdDeviation}</td>
+					<td>$${data.dollarChange}</td>
+					<td>${data.percChange}%</td>
+					<td>$${data.stdDeviation}</td>
 				</tr>
 			</c:when>
 		<c:when test="${param.stockName1 != null && param.stockName2 != null}">
+
 			<tr>
 				<th>Security Y</th>
 				<th>Security X</th>
 				<th>Begin Date</th>
 				<th>End Date</th>
 				<th>Correlation</th>
-				<th>Y Intercept (b0)</th>
-				<th>X Simple Regression Slope (b1)</th>
+				<th>Simple Regression Formula</th>
 			</tr>
+			
 			<tr>
 				<td>${param.stockName2}</td>
 				<td>${param.stockName1}</td>
 				<td>${param.begin}</td>
 				<td>${param.end}</td>
 				<td>${data.correlation}</td>
-				<td>${data.yIntercept}</td>
-				<td>${data.regCoef}</td>
+				<td>Estimated ${param.stockName2} = ${data.yIntercept} + ${data.regCoef}(${param.stockName1} price) + e</td>
 			</tr>
 		</c:when>
 		<c:otherwise>

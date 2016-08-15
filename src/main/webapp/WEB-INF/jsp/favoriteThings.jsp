@@ -13,16 +13,22 @@
 	<body>
 
 <div id="content">
-    <div class="container-fluid">
-    <nav class="nav navbar-default col-sm-12">
-    		<ul class="nav navbar-nav">
+    <nav class="navbar navbar-default">
+    	<div class="container-fluid">
+    		<button class = "navbar-toggle nav-justified" data-toggle="collapse" data-target=".navHeaderCollapse">
+    			Menu
+   		 	</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+    		<ul class="nav nav-justified">
     			<li><a href="home">Home</a></li>
     			<li><a href="favoriteThings">My Favorite Things</a></li>
     			<li><a href="funWithStocks">Fun With Stocks!</a></li>
     			<li><a href="contact">Contact Me</a></li>
     		</ul>
+    		</div>	
+    	    	
+    	</div>
     </nav>
-    </div>
 	<%-- <c:param name="pageTitle" value="My Favorite Things"/> --%>
     <h1 id="pageTitle">Favorite Things </h1>
 	<div id="favoriteActivities">
@@ -37,22 +43,22 @@
 			<li>Listen to lots of music</li>
 		</ul>
 	</div>
-	<div id="natParks" class="container-fluid">
+	<div id="natParks" class="container-fluid row">
 		<h2>National Parks:</h2>
 			<div id="yellow" class="parks">
 			<h6>Yellowstone National Park, </br>Northwest Wyoming/Southwest Montana</br>(Photo cred)</h6>
 			<a href="https://www.nps.gov/yell/index.htm" target="_blank">
-				<img id="yellowstone" src="img/yellowstone.jpg"/>
+				<img id="yellowstone" src="img/yellowstone.jpg" class="img-responsive"/>
 			</a>
 			</div>
 			<div id="sand" class="parks">
 			<h6>Great Sand Dunes National Park</br> Saguache County, Colorado</h6>
-			<a href="https://www.nps.gov/grsa/index.htm" target="_blank">
-				<img id="sandDunes" src="https://www.nps.gov/common/uploads/photogallery/imr/park/grsa/FB0FB3FA-155D-451F-67842C476C55A693/FB0FB3FA-155D-451F-67842C476C55A693-large.jpg"/>
+			<a href="https://www.nps.gov/grsa/index.htm" target="_blank" >
+				<img id="sandDunes" src="https://www.nps.gov/common/uploads/photogallery/imr/park/grsa/FB0FB3FA-155D-451F-67842C476C55A693/FB0FB3FA-155D-451F-67842C476C55A693-large.jpg" class="img-responsive"/>
 			</a>
 			</div>
 	</div>
-	<div id="favoriteBooks">
+	<div id="favoriteBooks" >
 	<h2>Books:</h2>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">

@@ -11,16 +11,22 @@
 	    <%-- <c:param name="pageTitle" value="Welcome!" /> --%>
 	</c:import>
 	<div id="content">
-    <div class="container-fluid">
-    <nav class="nav navbar-default col-sm-12">
-    		<ul class="nav navbar-nav">
+    <nav class="navbar navbar-default">
+    	<div class="container-fluid">
+    		<button class = "navbar-toggle nav-justified" data-toggle="collapse" data-target=".navHeaderCollapse">
+    			Menu
+   		 	</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+    		<ul class="nav nav-justified">
     			<li><a href="home">Home</a></li>
     			<li><a href="favoriteThings">My Favorite Things</a></li>
     			<li><a href="funWithStocks">Fun With Stocks!</a></li>
     			<li><a href="contact">Contact Me</a></li>
     		</ul>
+    		</div>	
+    	    	
+    	</div>
     </nav>
-    </div>
     <%-- <c:param name="pageTitle" value="Home"/> --%>
     <h1 id="pageTitle">Home</h1>
 <div id="welcome">

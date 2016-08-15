@@ -13,21 +13,27 @@
 	<body>
 
 <div id="content">
-    <div class="container-fluid">
-    <nav class="nav navbar-default col-sm-12">
-    		<ul class="nav navbar-nav">
+    <nav class="navbar navbar-default">
+    	<div class="container-fluid">
+    		<button class = "navbar-toggle nav-justified" data-toggle="collapse" data-target=".navHeaderCollapse">
+    			Menu
+   		 	</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+    		<ul class="nav nav-justified">
     			<li><a href="home">Home</a></li>
     			<li><a href="favoriteThings">My Favorite Things</a></li>
     			<li><a href="funWithStocks">Fun With Stocks!</a></li>
     			<li><a href="contact">Contact Me</a></li>
     		</ul>
+    		</div>	
+    	    	
+    	</div>
     </nav>
-    </div>
     <%-- <c:param name="pageTitle" value="Contact Me"/> --%>
     <h1 id="pageTitle">Contact Me</h1>
 	<h3>Email me at aaronshafron@gmail.com</h3>
-	<h3>Connect with me on <a href="https://www.linkedin.com/in/aaronshafron" target="_blank">LinkedIn</a></h3>
-	
+	<h3>Connect with me on <a href="https://www.linkedin.com/in/aaronshafron" target="_blank">LinkedIn.</a></h3>
+	<h3>See this code on <a href="https://github.com/ashaf1/myWebSite">Github.</a></h3>
 	</div> 
 
 <p class="footer"> Aaron Shafron 2016</br>
